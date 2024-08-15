@@ -1,0 +1,177 @@
+#! C:/Program Files/Nuke12.0v3/nuke-12.0.3.dll -nx
+version 12.0 v3
+Gizmo {
+ inputs 4
+ tile_color 0xff00ff
+ note_font "Verdana Bold"
+ addUserKnob {20 cryptomatte_relink_tab l "Cryptomatte Relink"}
+ addUserKnob {26 ICON l "" +STARTLINE T "<img src=L:/lea/_pipeline/unity/com.dschmuck.cryptomatte/nuke/icons/NukeGizmoHeader.png>"}
+ addUserKnob {2 metadata_file l "metadata (.json)" t "select the metadata JSON file that is exported from Unity"}
+ addUserKnob {6 object +STARTLINE}
+ object true
+ addUserKnob {6 material -STARTLINE}
+ addUserKnob {6 asset -STARTLINE}
+ addUserKnob {22 relink_button l "relink metadata" t "relinks the metadata from the JSON file to the given exr" T "import unityCrypto_nuke_utility_functions\nreload(unityCrypto_nuke_utility_functions)\n\nunityCrypto_nuke_utility_functions.relink_metadata()\n" +STARTLINE}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x243338ff
+  label "add channels"
+  note_font_size 42
+  xpos 386
+  ypos -254
+  bdwidth 490
+  bdheight 388
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x24382aff
+  label "copy inputs"
+  note_font_size 42
+  xpos 387
+  ypos 146
+  bdwidth 487
+  bdheight 400
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x382724ff
+  label "adjust metadata"
+  note_font_size 42
+  xpos 388
+  ypos 559
+  bdwidth 488
+  bdheight 299
+ }
+ Input {
+  inputs 0
+  name asset
+  xpos 686
+  ypos 470
+ }
+ Dot {
+  name Dot10
+  xpos 612
+  ypos 474
+ }
+ Input {
+  inputs 0
+  name material
+  xpos 695
+  ypos 363
+  number 1
+ }
+ Dot {
+  name Dot11
+  xpos 610
+  ypos 367
+ }
+ Input {
+  inputs 0
+  name object
+  xpos 695
+  ypos 256
+  number 2
+ }
+ Dot {
+  name Dot12
+  xpos 610
+  ypos 260
+ }
+ Input {
+  inputs 0
+  name beauty
+  xpos 452
+  ypos -313
+  number 3
+ }
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+ AddChannels {
+  channels crypto_object00
+  name AddChannels
+  xpos 452
+  ypos -114
+  disable {{!parent.object}}
+ }
+add_layer {crypto_material00 crypto_material00.red crypto_material00.green crypto_material00.blue crypto_material00.alpha}
+ AddChannels {
+  channels crypto_material00
+  name AddChannels1
+  xpos 452
+  ypos -72
+  disable {{!parent.material}}
+ }
+add_layer {crypto_asset00 crypto_asset00.red crypto_asset00.green crypto_asset00.blue crypto_asset00.alpha}
+ AddChannels {
+  channels crypto_asset00
+  name AddChannels2
+  xpos 452
+  ypos -30
+  disable {{!parent.asset}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_object00.red
+  from1 rgba.green
+  to1 crypto_object00.green
+  from2 rgba.blue
+  to2 crypto_object00.blue
+  name Copy_CryptoObject
+  xpos 452
+  ypos 231
+  disable {{!parent.object}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_material00.red
+  from1 rgba.green
+  to1 crypto_material00.green
+  from2 rgba.blue
+  to2 crypto_material00.blue
+  name Copy_CryptoMaterial
+  xpos 452
+  ypos 338
+  disable {{!parent.material}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_asset00.red
+  from1 rgba.green
+  to1 crypto_asset00.green
+  from2 rgba.blue
+  to2 crypto_asset00.blue
+  name Copy_CryptoAsset
+  xpos 452
+  ypos 445
+  disable {{!parent.asset}}
+ }
+ ModifyMetaData {
+  name ModifyMetaData_Object
+  xpos 452
+  ypos 690
+  disable {{!parent.object}}
+ }
+ ModifyMetaData {
+  name ModifyMetaData_Material
+  xpos 452
+  ypos 718
+  disable {{!parent.material}}
+ }
+ ModifyMetaData {
+  name ModifyMetaData_Asset
+  xpos 452
+  ypos 754
+  disable {{!parent.asset}}
+ }
+ Output {
+  name Output1
+  xpos 452
+  ypos 946
+ }
+end_group

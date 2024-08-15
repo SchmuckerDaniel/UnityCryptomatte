@@ -1,0 +1,13 @@
+{
+    "name": "com.dschmuck.cyptomatte.editor",
+    "references": ["GUID:b58e941cb2044dc46b87707bd7d5369a"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

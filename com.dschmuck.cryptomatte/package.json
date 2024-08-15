@@ -1,0 +1,25 @@
+{
+    "name": "com.dschmuck.cryptomatte", 
+    "displayName": "Unity Cryptomatte", 
+    "description": "This package enables you to render CRYPTOMATTE ID passes from Unity",
+    "author": "Daniel Schmucker",
+    "version": "0.0.1",
+    "keywords": [
+        "ID", 
+        "passes",
+        "rendering", 
+        "render", 
+        "compositing"
+    ],
+    "unity": "2019.3", 
+    "dependencies": {
+    }, 
+    "samples": [
+        {
+            "description": "A basic scene to get familiar with the cryptomatte manager prefab. \nTry the preview feature and exporting the metadata to a .json file.", 
+            "displayName": "Cryptomatte Sample Scene", 
+            "path": "Samples~/CryptomatteSampleScene"
+        }
+    ]
+    
+}

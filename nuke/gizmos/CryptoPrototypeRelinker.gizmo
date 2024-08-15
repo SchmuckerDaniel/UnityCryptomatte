@@ -1,0 +1,143 @@
+#! C:/Program Files/Nuke11.3v1/nuke-11.3.1.dll -nx
+version 11.3 v1
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {22 python_button l "Relink Cryptomatte" T "import sys\nsys.path.append (\"F:/TD_Research/Diploma/001_Testing/003_Nuke/UnityCrypto_Nuke_Utilities/python\")\n\nimport unityCrypto_nuke_utility_functions\nreload(unityCrypto_nuke_utility_functions)\n\nunityCrypto_nuke_utility_functions.relink_exr_and_meta()" +STARTLINE}
+}
+ BackdropNode {
+  inputs 0
+  name Object_Manifest
+  xpos 498
+  ypos -455
+  bdwidth 675
+  bdheight 77
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file F:/TD_Research/Diploma/001_Testing/001_Unity/catlikeSRP/Renderings/HashingTest/SomeImageName_cryptoObject00.exr
+  format "1228 691 0 0 1228 691 1 "
+  origset true
+  name Read_CryptoObject
+  xpos 415
+  ypos 28
+ }
+set N4b6d0000 [stack 0]
+push 0
+ Viewer {
+  inputs 2
+  frame_range 1-100
+  input_number 1
+  name Viewer1
+  xpos 583
+  ypos 51
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file F:/TD_Research/Diploma/001_Testing/001_Unity/catlikeSRP/Renderings/HashingTest/SomeImageName_cryptoAsset00.exr
+  format "1228 691 0 0 1228 691 1 "
+  origset true
+  name Read_CryptoAsset
+  xpos 420
+  ypos 227
+ }
+ Dot {
+  name Dot10
+  xpos 314
+  ypos 261
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file F:/TD_Research/Diploma/001_Testing/001_Unity/catlikeSRP/Renderings/HashingTest/SomeImageName_cryptoMaterial00.exr
+  format "1228 691 0 0 1228 691 1 "
+  origset true
+  name Read_CryptoMaterial
+  xpos 420
+  ypos 120
+ }
+ Dot {
+  name Dot11
+  xpos 315
+  ypos 154
+ }
+push $N4b6d0000
+ Dot {
+  name Dot12
+  xpos 305
+  ypos 62
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 169
+  ypos -140
+ }
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+add_layer {crypto_asset00 crypto_asset00.red crypto_asset00.green crypto_asset00.blue crypto_asset00.alpha}
+add_layer {crypto_material00 crypto_material00.red crypto_material00.green crypto_material00.blue crypto_material00.alpha}
+ AddChannels {
+  channels crypto_object00
+  channels2 crypto_asset00
+  channels3 crypto_material00
+  name AddChannels
+  xpos 169
+  ypos -46
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_object00.red
+  from1 rgba.green
+  to1 crypto_object00.green
+  from2 rgba.blue
+  to2 crypto_object00.blue
+  name Copy_CryptoObject
+  xpos 169
+  ypos 39
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_material00.red
+  from1 rgba.green
+  to1 crypto_material00.green
+  from2 rgba.blue
+  to2 crypto_material00.blue
+  name Copy_CryptoMaterial
+  xpos 169
+  ypos 131
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 crypto_asset00.red
+  from1 rgba.green
+  to1 crypto_asset00.green
+  from2 rgba.blue
+  to2 crypto_asset00.blue
+  name Copy_CryptoAsset
+  xpos 169
+  ypos 238
+ }
+ ModifyMetaData {
+  metadata {
+   {set exr/cryptomatte/28322e9/name crypto_asset}
+   {set exr/cryptomatte/bda530a/manif_file TestImageJson_cryptoMaterial00_manifest.json}
+   {set exr/cryptomatte/f834d0a/manif_file TestImageJson_cryptoObject00_manifest.json}
+   {set exr/cryptomatte/bda530a/name crypto_material}
+   {set exr/cryptomatte/f834d0a/name crypto_object}
+   {set exr/cryptomatte/28322e9/manif_file TestImageJson_cryptoAsset00_manifest.json}
+  }
+  name ModifyMetaData
+  selected true
+  xpos 169
+  ypos 365
+ }
+ Output {
+  name Output1
+  xpos 169
+  ypos 465
+ }
+end_group
