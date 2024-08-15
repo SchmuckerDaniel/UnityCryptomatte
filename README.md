@@ -11,7 +11,11 @@ help with using the generated ID Mattes in Nuke by relinking the metadata from
 an external .json file, since it is currently not possible to write metadata 
 directly into the .exr headers while rendering in Unity.
 
-
+IMPORTANT - This tool was developed for a short film in 2019-2020 and has not been
+updated since. It worked well enough to use for a small project, but is in no way
+production ready or tested. 
+Please feel free to use this as a starting point to created your own solution to 
+render cryptomattes from Unity, as this is little more than a prototype. 
 
 ---
 
